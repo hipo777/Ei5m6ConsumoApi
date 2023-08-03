@@ -8,3 +8,4 @@ data class Terreno(
     @SerializedName("type") val tipo: String,
     @SerializedName("img_src") val img: String
 )
+//Pojo
