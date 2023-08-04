@@ -6,20 +6,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.demre.ei5m6consumoapi.data.Repositorio
+import org.demre.ei5m6consumoapi.data.local.TerrenoDatabase
 import org.demre.ei5m6consumoapi.data.remote.Terreno
 import org.demre.ei5m6consumoapi.data.remote.TerrenoRetrofit
 
 class TerrenoVM(application: Application) : AndroidViewModel(application) {
-    private val repositorio: Repositorio
 
-    val terrenosLiveData = MutableLiveData<List<Terreno>>()
+    private val repositorio: Repositorio
+    fun terrenosLiveData() = repositorio.obtenerTerrenos()
 
     init {
-        val api = TerrenoRetrofit.getRetrofitTerreno()
-        repositorio = Repositorio(api)
+        val terrenoApi = TerrenoRetrofit.getRetrofitTerreno()
+        val terrenoBaseDatos = TerrenoDatabase.getDataBase(application).getITerrenoDao()
+        repositorio = Repositorio(terrenoApi, terrenoBaseDatos)
     }
-    fun getAllTerrenos() = viewModelScope.launch{
-        terrenosLiveData.value = repositorio.cargarTerreno()
+    fun obtenerTerreno() = viewModelScope.launch{
+        repositorio.cargarTerreno()
 
     }
 

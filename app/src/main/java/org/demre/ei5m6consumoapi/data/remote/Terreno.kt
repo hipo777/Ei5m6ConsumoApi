@@ -6,6 +6,6 @@ data class Terreno(
     val id: String,
     @SerializedName("price") val precio: Int,
     @SerializedName("type") val tipo: String,
-    @SerializedName("img_src") val img: String
+    @SerializedName("img_src") val imagen: String
 )
 //Pojo

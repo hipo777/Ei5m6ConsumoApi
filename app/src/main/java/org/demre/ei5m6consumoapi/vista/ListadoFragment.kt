@@ -20,10 +20,11 @@ class ListadoFragment : Fragment() {
 
         binding = FragmentListadoBinding.inflate(layoutInflater, container, false)
 
-        initAdapter()
+
 
         binding.btnCargar.setOnClickListener{
-            terrenoVM.getAllTerrenos()
+            terrenoVM.obtenerTerreno()
+            initAdapter()
         }
 
         return binding.root
@@ -35,7 +36,7 @@ class ListadoFragment : Fragment() {
         val adapter = AdapterTerreno()
 
         binding.rvRecycler.adapter = adapter
-        terrenoVM.terrenosLiveData.observe(viewLifecycleOwner){
+        terrenoVM.terrenosLiveData().observe(viewLifecycleOwner){
             adapter.setData(it)
         }
     }
