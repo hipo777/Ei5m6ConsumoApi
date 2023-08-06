@@ -1,9 +1,12 @@
 package org.demre.ei5m6consumoapi.vista
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import org.demre.ei5m6consumoapi.R
 import org.demre.ei5m6consumoapi.data.local.TerrenoEntity
 import org.demre.ei5m6consumoapi.data.remote.Terreno
 import org.demre.ei5m6consumoapi.databinding.ItemTerrenoBinding
@@ -36,6 +39,15 @@ class AdapterTerreno : RecyclerView.Adapter<AdapterTerreno.ItemTerrenoViewHolder
     class ItemTerrenoViewHolder(val v: ItemTerrenoBinding): RecyclerView.ViewHolder(v.root) {
         fun bind(terreno: TerrenoEntity){
             v.img.load(terreno.imagen)
+            v.img.setOnClickListener{
+
+                val bundle = Bundle()
+                bundle.putString("id", terreno.id)
+                bundle.putString("imagen", terreno.imagen)
+                bundle.putString("precio", terreno.precio.toString())
+                Navigation.findNavController(v.root)
+                    .navigate(R.id.action_listadoTerreno_to_detalleFragment, bundle)
+            }
         }
 
     }

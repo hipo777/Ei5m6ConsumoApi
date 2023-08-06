@@ -9,5 +9,18 @@
         android:id="@+id/listadoFragment"
         android:name="org.demre.ei5m6consumoapi.vista.ListadoFragment"
         android:label="fragment_listado"
-        tools:layout="@layout/fragment_listado" />
+        tools:layout="@layout/fragment_listado">
+    <action
+            android:id="@+id/action_listadoTerreno_to_detalleFragment"
+            app:destination="@id/detalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleFragment"
+        android:name="org.demre.ei5m6consumoapi.vista.DetalleFragment"
+        android:label="fragment_detalle"
+        tools:layout="@layout/fragment_detalle" >
+        <action
+            android:id="@+id/action_detalleFragment_to_listadoTerreno"
+            app:destination="@id/listadoFragment" />
+    </fragment>
 </navigation>

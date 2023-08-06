@@ -23,7 +23,9 @@ class Repositorio(private val terrenoApi: TerrenoApi, private val terrenoDao: Te
         }
 
     }
+    fun getTerreno(id: String): LiveData<TerrenoEntity> = terrenoDao.getTerreno(id)
+
+    fun Terreno.transformar(): TerrenoEntity =
+        TerrenoEntity(this.id, this.precio, this.tipo, this.imagen)
 }
 
-fun Terreno.transformar(): TerrenoEntity =
-    TerrenoEntity(this.id, this.precio, this.tipo, this.imagen)
